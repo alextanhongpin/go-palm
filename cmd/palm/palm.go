@@ -16,11 +16,14 @@ import (
 // palm -prompt="what is 1+1" | glow
 func main() {
 	var keyPath, prompt string
+	var answerOnly bool
 	var dryRun bool
 
 	flag.StringVar(&keyPath, "key", filepath.Join(os.Getenv("HOME"), ".palm"), "the path to PaLM key")
 	flag.StringVar(&prompt, "prompt", "", "the prompt")
 	flag.StringVar(&prompt, "p", "", "the prompt (shorthand)")
+	flag.BoolVar(&answerOnly, "answer", "", "only shows the answer, not the prompt")
+	flag.BoolVar(&answerOnly, "a", "", "only shows the answer, not the prompt (shorthand)")
 	flag.BoolVar(&dryRun, "dry-run", false, "execute dry run")
 	flag.Parse()
 
@@ -49,9 +52,11 @@ func main() {
 		log.Fatal(err)
 	}
 
-	fmt.Println("# PROMPT")
-	fmt.Println(prompt)
-	fmt.Println()
+	if !answerOnly {
+		fmt.Println("# PROMPT")
+		fmt.Println(prompt)
+		fmt.Println()
+	}
 	fmt.Println("# ANSWER")
 	fmt.Println(resp)
 }
