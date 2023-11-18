@@ -16,10 +16,12 @@ import (
 // palm -prompt="what is 1+1" | glow
 func main() {
 	var keyPath, prompt string
+	var dryRun bool
 
 	flag.StringVar(&keyPath, "key", filepath.Join(os.Getenv("HOME"), ".palm"), "the path to PaLM key")
 	flag.StringVar(&prompt, "prompt", "", "the prompt")
 	flag.StringVar(&prompt, "p", "", "the prompt (shorthand)")
+	flag.BoolVar(&dryRun, "dry-run", false, "execute dry run")
 	flag.Parse()
 
 	b, err := os.ReadFile(keyPath)
@@ -27,6 +29,12 @@ func main() {
 		panic(err)
 	}
 	b = bytes.TrimSpace(b)
+
+	if dryRun {
+		fmt.Println("# PROMPT")
+		fmt.Println(prompt)
+		os.Exit(0)
+	}
 
 	llm := llms.NewPalm(string(b))
 	defer llm.Close()
