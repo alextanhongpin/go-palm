@@ -22,8 +22,8 @@ func main() {
 	flag.StringVar(&keyPath, "key", filepath.Join(os.Getenv("HOME"), ".palm"), "the path to PaLM key")
 	flag.StringVar(&prompt, "prompt", "", "the prompt")
 	flag.StringVar(&prompt, "p", "", "the prompt (shorthand)")
-	flag.BoolVar(&answerOnly, "answer", "", "only shows the answer, not the prompt")
-	flag.BoolVar(&answerOnly, "a", "", "only shows the answer, not the prompt (shorthand)")
+	flag.BoolVar(&answerOnly, "answer", true, "only shows the answer, not the prompt")
+	flag.BoolVar(&answerOnly, "a", true, "only shows the answer, not the prompt (shorthand)")
 	flag.BoolVar(&dryRun, "dry-run", false, "execute dry run")
 	flag.Parse()
 
