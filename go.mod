@@ -4,6 +4,7 @@ go 1.21.3
 
 require (
 	cloud.google.com/go/ai v0.1.4
+	github.com/antonmedv/expr v1.15.4
 	google.golang.org/api v0.151.0
 )
 
